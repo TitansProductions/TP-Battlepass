@@ -547,8 +547,30 @@ p {
 	src: url("../font/Prototype.ttf");
   }
 
-@media only screen and (max-width: 1060px) {
-	.dialog {
-		left: 0%;
+@media only screen and (max-width: 1920px) {
+	#pack_level_box_img {
+
+		margin-top: -15.5%;
+		margin-left: 29.5%;
+	}
+
+	#pack_display_level_box_description_title{
+		margin-top: -18%;
+		left: 12.5%;
+	}
+	  
+	#pack_display_level_box_description{
+		margin-top: -16%;
+		left: 12.60%;
+	}
+
+	#pack_display_level_box_description_itemname{
+		margin-top: -5%;
+		left: 42.1%;
+	}
+
+	#level_box_display_claim{
+		margin-top: -23%;
+		margin-left: 53%;
 	}
 }
