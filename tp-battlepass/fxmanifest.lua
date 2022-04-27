@@ -3,7 +3,7 @@ game 'gta5'
 
 author 'Nosmakos'
 description 'Titans Productions Battlepass'
-version '1.0.0'
+version '1.1.0'
 
 shared_script '@es_extended/imports.lua'
 
