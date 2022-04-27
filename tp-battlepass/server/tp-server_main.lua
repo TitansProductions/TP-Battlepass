@@ -52,7 +52,7 @@ AddEventHandler("tp-battlepass:loadPlayerInformation", function()
             if info[1] == nil then
                 MySQL.Async.execute('INSERT INTO battlepass (identifier, name, playtime, level) VALUES (@identifier, @name, @playtime, @level)',
                 {
-                    ['@identifier'] = identifier,
+                    ['@identifier'] = xPlayer.identifier,
                     ['@name'] = GetPlayerName(source),
                     ['@playtime'] = 0,
                     ['@level']   = 1
