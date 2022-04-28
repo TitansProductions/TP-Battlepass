@@ -1,5 +1,4 @@
 # TP-Battlepass
-This is a unique battlepass script for your players with many features and optimizations. 
 
 ![tp-battlepass](https://user-images.githubusercontent.com/84135181/165779172-314e370e-040f-475c-a12b-0e5de5b45f3e.jpg)
 
@@ -11,23 +10,23 @@ Summary:
 
 This is a unique battlepass script for your players with many features and optimizations.
 
-Features
+Features:
 
-    Battlepass Leveling System works with playtime which is also configurable if you want to increase level requirement after every level (All levels are having 300 minutes as playtime as default).
+- Battlepass Leveling System works with playtime which is also configurable if you want to increase level requirement after every level (All levels are having 300 minutes as playtime as default).
 
-    Supports Multicharacters.
+- Supports Multicharacters.
 
-    Level rewards, such as items, weapons, money, black_money, bank.
+- Level rewards, such as items, weapons, money, black_money, bank.
 
-    Custom reward packages (Optionable). That means, if you want to give multiple items, money or anything at the same time in a level reward, you can create a pack in Config.levelRewardPacks called for example “clips” and add this pack as a reward type in order to give multiple items (in this pack i would give all magazine types).
+- Custom reward packages (Optionable). That means, if you want to give multiple items, money or anything at the same time in a level reward, you can create a pack in Config.levelRewardPacks called for example “clips” and add this pack as a reward type in order to give multiple items (in this pack i would give all magazine types).
 
-    Some basic images are included (Suggested images size is: 128 x 91 | 128 x 128), otherwise displaying images will not be correct.
+- Some basic images are included (Suggested images size is: 128 x 91 | 128 x 128), otherwise displaying images will not be correct.
 
-Commands
+Commands:
 
-    /battlepass - Allows you to open battlepass.
+- /battlepass - Allows you to open battlepass.
 
-    /setbattlepassexp - Sets battlepass current level exp progress on the selected player id.
+- /setbattlepassexp - Sets battlepass current level exp progress on the selected player id.
 
 Make sure before starting the script to change the items in the config
 
