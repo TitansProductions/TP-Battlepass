@@ -1,6 +1,10 @@
 Config = {}
 
 Config.Locale      = "en"
+
+-- ## [SCRIPTS SUPPORTED]: mythic_notify, okoknotify, pnotify, default
+Config.NotificationScript     = "mythic_notify" 
+
 Config.LevelUpCost = 10
 
 Config.levelRewardPacks    = {
