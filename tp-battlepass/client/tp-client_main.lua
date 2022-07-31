@@ -168,7 +168,7 @@ RegisterNUICallback('buyLevel', function (data)
 			TriggerServerEvent("tp-battlepass:buyLevel", data.currentLevel, data.level, levelCost)
 
 		else
-			TriggerEvent('mythic_notify:client:SendAlert',  { type = 'error', text = 'You dont have enough Donate Coins (' .. levelCost .. ') to perform this action.', style = { ['background-color'] = '#DC143C', ['color'] = '#FFFFFF' } })
+			sendNotification('You dont have enough money (' .. levelCost .. ') to perform this action.' ,"error")
 		end
 
 	end, levelCost)
@@ -229,3 +229,48 @@ Citizen.CreateThread(function()
 		end
 	end
 end)
+
+function sendNotification(text, type)
+    if Config.NotificationScript == "mythic_notify" then
+
+        if type == nil then
+            exports['mythic_notify']:DoHudText('error', text)
+        else
+            exports['mythic_notify']:DoHudText(type, text)
+        end
+
+    elseif Config.NotificationScript == "pnotify" then
+
+        if type == nil then
+            exports.pNotify:SendNotification({
+                text = text,
+                type = "error",
+                timeout = 2500,
+                layout = "centerLeft",
+                queue = "left"
+            })
+        else
+            exports.pNotify:SendNotification({
+                text = text,
+                type = type,
+                timeout = 2500,
+                layout = "centerLeft",
+                queue = "left"
+            })
+        end
+
+    elseif Config.NotificationScript == 'okoknotify' then
+
+        if type == nil then
+            exports['okokNotify']:Alert('', text, 2500, 'error')
+        else
+            exports['okokNotify']:Alert('', text, 2500, type)
+        end
+        
+    elseif Config.NotificationScript == "default" then
+        
+        ESX.ShowNotification(text)
+
+    end
+
+end
