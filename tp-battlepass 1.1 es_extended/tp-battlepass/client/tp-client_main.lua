@@ -7,28 +7,29 @@ local uiType = 'enable_battlepass'
 
 cachedData = {}
 
-ESX = nil
+if ESX.IsPlayerLoaded() then
+	Citizen.SetTimeout(100, function()
+		ESX.PlayerLoaded = true
+		ESX.PlayerData = ESX.GetPlayerData()
 
-Citizen.CreateThread(function()
-	while ESX == nil do
-		TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
-		Citizen.Wait(0)
-	end
+		Wait(1000)
 
-	Wait(1000)
-
-	SendNUIMessage({
-		action = 'mainData',
-		battlepass_levels = #Config.LevelsConfiguration
-	})	
+		SendNUIMessage({
+			action = 'mainData',
+			battlepass_levels = #Config.LevelsConfiguration
+		})	
 
 	
-	TriggerServerEvent('tp-battlepass:loadPlayerInformation')
-end)
+		TriggerServerEvent('tp-battlepass:loadPlayerInformation')
+	end)
+end
 
 RegisterNetEvent('esx:playerLoaded')
 AddEventHandler('esx:playerLoaded', function(playerData, isNew)
-	Wait(2000)
+	ESX.PlayerLoaded = true
+	ESX.PlayerData = playerData
+
+	Wait(1000)
 
 	SendNUIMessage({
 		action = 'mainData',
@@ -167,7 +168,7 @@ RegisterNUICallback('buyLevel', function (data)
 			TriggerServerEvent("tp-battlepass:buyLevel", data.currentLevel, data.level, levelCost)
 
 		else
-			TriggerEvent('mythic_notify:client:SendAlert',  { type = 'error', text = 'You dont have enough Donate Coins (' .. levelCost .. ') to perform this action.', style = { ['background-color'] = '#DC143C', ['color'] = '#FFFFFF' } })
+			sendNotification('You dont have enough money (' .. levelCost .. ') to perform this action.' ,"error")
 		end
 
 	end, levelCost)
@@ -228,3 +229,48 @@ Citizen.CreateThread(function()
 		end
 	end
 end)
+
+function sendNotification(text, type)
+    if Config.NotificationScript == "mythic_notify" then
+
+        if type == nil then
+            exports['mythic_notify']:DoHudText('error', text)
+        else
+            exports['mythic_notify']:DoHudText(type, text)
+        end
+
+    elseif Config.NotificationScript == "pnotify" then
+
+        if type == nil then
+            exports.pNotify:SendNotification({
+                text = text,
+                type = "error",
+                timeout = 2500,
+                layout = "centerLeft",
+                queue = "left"
+            })
+        else
+            exports.pNotify:SendNotification({
+                text = text,
+                type = type,
+                timeout = 2500,
+                layout = "centerLeft",
+                queue = "left"
+            })
+        end
+
+    elseif Config.NotificationScript == 'okoknotify' then
+
+        if type == nil then
+            exports['okokNotify']:Alert('', text, 2500, 'error')
+        else
+            exports['okokNotify']:Alert('', text, 2500, type)
+        end
+        
+    elseif Config.NotificationScript == "default" then
+        
+        ESX.ShowNotification(text)
+
+    end
+
+end
