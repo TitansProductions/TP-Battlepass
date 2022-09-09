@@ -22,9 +22,6 @@ end)
 
 RegisterNetEvent('esx:playerLoaded')
 AddEventHandler('esx:playerLoaded', function(playerData, isNew)
-	ESX.PlayerLoaded = true
-	ESX.PlayerData = playerData
-
 	Wait(1000)
 
 	SendNUIMessage({
