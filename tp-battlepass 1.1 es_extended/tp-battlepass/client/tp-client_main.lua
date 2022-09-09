@@ -1,3 +1,5 @@
+ESX         = nil
+
 local isAllowedToClose = false
 
 local guiEnabled, isDead = false, false
@@ -7,22 +9,16 @@ local uiType = 'enable_battlepass'
 
 cachedData = {}
 
-if ESX.IsPlayerLoaded() then
-	Citizen.SetTimeout(100, function()
-		ESX.PlayerLoaded = true
-		ESX.PlayerData = ESX.GetPlayerData()
+Citizen.CreateThread(function ()
+	while ESX == nil do
+		TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
+		Citizen.Wait(5)
+	end
 
-		Wait(1000)
-
-		SendNUIMessage({
-			action = 'mainData',
-			battlepass_levels = #Config.LevelsConfiguration
-		})	
-
-	
-		TriggerServerEvent('tp-battlepass:loadPlayerInformation')
-	end)
-end
+	Wait(2000)
+	SendNUIMessage({action = 'mainData',battlepass_levels = #Config.LevelsConfiguration})	
+	TriggerServerEvent('tp-battlepass:loadPlayerInformation')
+end)
 
 RegisterNetEvent('esx:playerLoaded')
 AddEventHandler('esx:playerLoaded', function(playerData, isNew)
